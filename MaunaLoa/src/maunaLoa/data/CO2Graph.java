@@ -264,8 +264,6 @@ public final class CO2Graph extends JComponent {
 		g2.setColor(Color.BLACK);
 		cal.setTime(startDate.getTime());
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD));
-		AffineTransform t = g2.getTransform();
-		g2.transform(new AffineTransform(matrix));
 		for (; monthDif(cal, endDate) > 0; cal.add(Calendar.MONTH, xInterval)) {
 			String s;
 			if (xInterval >= 12)
@@ -277,14 +275,12 @@ public final class CO2Graph extends JComponent {
 			int xCoord = (int) (graphBounds.width * monthDif(startDate, cal)
 					/ monthWidth + graphBounds.x);
                         System.out.println(s);
-			g2.drawString(s, graphTop + 5, 5 - xCoord);
+			g2.drawString(s, xCoord - 5, graphBounds.y + graphBounds.height + 15);
 		}
 		int wordWidth = (int) g2.getFont().createGlyphVector(
 				g2.getFontRenderContext(), "Concentration ( in ppmv )")
 				.getVisualBounds().getWidth();
-		g2.drawString("Concentration ( in ppmv )",
-				(getHeight() - wordWidth) / 2, -10);
-		g2.setTransform(t);
+		g2.drawString("Concentration ( in ppm )", 5, graphBounds.y - 10);
 		wordWidth = (int) g2.getFont().createGlyphVector(
 				g2.getFontRenderContext(), title).getVisualBounds().getWidth();
 		g2.drawString(title, (getWidth() - wordWidth) / 2, 20);

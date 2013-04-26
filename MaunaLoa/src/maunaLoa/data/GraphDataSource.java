@@ -38,6 +38,7 @@ public final class GraphDataSource {
 		Scanner scan;
 		data = new ArrayList<Datum>();
 		String fileName = site.substring(site.lastIndexOf('/') + 1);
+                System.out.println(this.getClass().getResourceAsStream("siteData/" + fileName));
 		scan = new Scanner(getClass().getClassLoader().getResourceAsStream(
 				"siteData/" + fileName));
 		while (scan.hasNextLine())
